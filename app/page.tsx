@@ -1,12 +1,12 @@
 import { getToken } from "@/utils/session-managment";
 import Link from "next/link";
 import { FaExternalLinkAlt } from "react-icons/fa";
-
+import Image from "next/image";
 export default async function Home() {
       const userToken = await getToken();
   return (
     <div className=" bg-[#7748cc] min-h-[calc(100vh-128px)]">
-      <img className="sm:h-1/2 max-h-[560px] min-h-[300px] w-full sm:max-w-screen-xl" src="To-do_List_Template.png" alt="" />
+      <Image className="sm:h-1/2 max-h-[560px] min-h-[300px] w-full sm:max-w-screen-xl" width={50} height={50} src="To-do_List_Template.png" alt="" />
       <div className="px-8">
         <p className="text-white w-3/4">
           Enhance individual and team work operations by effectively organizing,

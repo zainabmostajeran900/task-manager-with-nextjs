@@ -1,11 +1,11 @@
 "use client";
+
 import { Input } from "./Input";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSignupFormSchema } from "@/validations/L&S.validation";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 import { IError } from "@/apis/server-side-apis/auth_service";
 
 export const LoginSignupForm: React.FC<{
@@ -13,6 +13,7 @@ export const LoginSignupForm: React.FC<{
 }> = ({ requestFn }) => {
   const { push } = useRouter();
   const pathname = usePathname();
+
   const {
     control,
     handleSubmit,
@@ -21,22 +22,24 @@ export const LoginSignupForm: React.FC<{
     resolver: zodResolver(LoginSignupFormSchema),
     mode: "all",
   });
+
   const submitForm = async (data: ILoginSignup) => {
     const err = await requestFn(data);
+
     if (err) {
       return toast.error(err.message);
     }
-    pathname === "/login"
-      ? toast.success("logged in")
-      : toast.success("user created");
+
+    // ✅ اصلاح‌شده: به جای expression شرطی، از if/else استفاده کردیم
+    if (pathname === "/login") {
+      toast.success("logged in");
+    } else {
+      toast.success("user created");
+    }
 
     push("/tasks");
-    // try {
-    //   await requestFn(data)
-    // } catch (error ) {
-    //   console.log(error)
-    // }
   };
+
   return (
     <form
       onSubmit={handleSubmit(submitForm)}
@@ -52,7 +55,8 @@ export const LoginSignupForm: React.FC<{
             {...field}
           />
         )}
-      ></Controller>
+      />
+
       <Controller
         control={control}
         name="password"
@@ -63,12 +67,12 @@ export const LoginSignupForm: React.FC<{
             {...field}
           />
         )}
-      ></Controller>
+      />
 
       <button
         disabled={!isDirty || !isValid}
         type="submit"
-        className="bg-slate-400 textbase font font-semibold px-2 py-1 rounded-sm mt-5 hover:bg-slate-500 disabled:bg-gray-600"
+        className="bg-slate-400 text-base font-semibold px-2 py-1 rounded-sm mt-5 hover:bg-slate-500 disabled:bg-gray-600"
       >
         {pathname === "/login" ? "Login" : "Signup"}
       </button>
