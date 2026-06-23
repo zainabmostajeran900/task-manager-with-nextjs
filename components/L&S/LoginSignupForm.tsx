@@ -21,6 +21,10 @@ export const LoginSignupForm: React.FC<{
   } = useForm<ILoginSignup>({
     resolver: zodResolver(LoginSignupFormSchema),
     mode: "all",
+      defaultValues: {
+    userName: "",
+    password: "",
+  },
   });
 
   const submitForm = async (data: ILoginSignup) => {

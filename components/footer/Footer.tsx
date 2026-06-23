@@ -2,7 +2,7 @@ import { Input } from "../L&S/Input";
 
 export const Footer: React.FC = () => {
   return (
-    <div className="bg-slate-900 text-white px-4 md:px-6 py-3">
+    <div className="bg-slate-900 text-white px-4 md:px-6 py-3 pt-2">
       <div className="flex flex-wrap md:px-6 items-center justify-between sm:w-1/2 md:w-full gap-x-2 text-appWhite">
         <div>
           <h2 className="font-semibold text-appWhite text-center">

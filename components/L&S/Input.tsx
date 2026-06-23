@@ -1,19 +1,14 @@
 "use client";
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 
-interface IInputProps
-  extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+interface IInputProps extends DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+> {
   label: string;
   error?: string;
 }
-export const Input: React.FC<IInputProps> = ({
-  label,
-  error,
-  ...props
-}) => {
+export const Input: React.FC<IInputProps> = ({ label, error, ...props }) => {
   return (
     <div className="max-w-[309px]">
       <div className="flex flex-wrap gap-x-4">
@@ -24,8 +19,8 @@ export const Input: React.FC<IInputProps> = ({
           {label} :
         </label>
         <input
-          {...props}
           type="text"
+          {...props}
           id={label}
           className="rounded-sm px-2 text-black"
         />
